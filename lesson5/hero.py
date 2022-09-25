@@ -11,27 +11,28 @@ key_right = 'd'     # шаг вправо
 key_up = 'space'      # шаг вверх
 key_down = 'alt'     # шаг вниз
 
-key_turn_left = 'e'     # поворот камеры направо (а мира - налево)
-key_turn_right = 'q'    # поворот камеры налево (а мира - направо) 
+key_turn_left = 'q'     # поворот камеры направо (а мира - налево)
+key_turn_right = 'e'    # поворот камеры налево (а мира - направо) 
 
-key_build = 'b'     # построить блок перед собой
-key_destroy = 'v'   # разрушить блок перед собой
+key_build = 'mouse3'     # построить блок перед собой
+key_destroy = 'mouse1'   # разрушить блок перед собой
 
 key_savemap = 'k'
 key_loadmap = 'l'
 
 class Hero():
-    def __init__(self, pos, land):
-        self.land = land
-        self.mode = True # режим прохождения сквозь всё
-        self.hero = loader.loadModel('smiley')
-        self.hero.setColor(1, 0.5, 0)
-        self.hero.setScale(0.3) 
-        self.hero.setH(180)
-        self.hero.setPos(pos)
-        self.hero.reparentTo(render)
-        self.cameraBind()
+    def __init__(self, pos, land): 
+        self.land = land 
+        self.hero = loader.loadModel('smiley') 
+        self.hero.setColor(51/255, 204/255, 51/255, 1) 
+        self.spectator = True 
+        self.color = (92, 219, 213, 1) 
+        self.hero.setScale(0.5) 
+        self.hero.setPos(pos) 
+        self.hero.reparentTo(render) 
+        self.cameraBind() 
         self.accept_events()
+        self.mode = True
 
     def cameraBind(self):
         base.disableMouse()
@@ -164,7 +165,7 @@ class Hero():
             self.hero.setZ(self.hero.getZ() - 1)
     
     def build(self):
-        angle = self.hero.getH() % 360
+        angle = (self.hero.getH() % 360) + 180
         pos = self.look_at(angle)
         if self.mode:
             self.land.addBlock(pos)
@@ -172,7 +173,7 @@ class Hero():
             self.land.buildBlock(pos)
 
     def destroy(self):
-        angle = self.hero.getH() % 360
+        angle = (self.hero.getH() % 360) + 180
         pos = self.look_at(angle)
         if self.mode:
             self.land.delBlock(pos)
