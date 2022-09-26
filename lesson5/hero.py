@@ -17,7 +17,7 @@ key_turn_right = 'e'    # поворот камеры налево (а мира 
 key_build = 'mouse3'     # построить блок перед собой
 key_destroy = 'mouse1'   # разрушить блок перед собой
 
-key_savemap = 'k'
+key_savemap = 'm'
 key_loadmap = 'l'
 
 class Hero():

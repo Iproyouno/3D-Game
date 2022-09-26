@@ -121,7 +121,7 @@ class Mapmanager():
             # считываем количество блоков
             length = pickle.load(fin)
 
-            for i in range(lenght):
+            for i in range(length):
                 # считываем позицию
                 pos = pickle.load(fin)
 
